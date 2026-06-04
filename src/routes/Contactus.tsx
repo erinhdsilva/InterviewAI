@@ -68,8 +68,14 @@ const ContactUsPage: React.FC = () => {
                   Our Address
                 </h3>
                 <p className="text-gray-600">
-                  BH-3, IIIT Allahabad<br /> Tech City, Innovation State<br />India
-                </p>
+  IIIT Lucknow
+  <br />
+  Chak Ganjaria, C. G. City
+  <br />
+  Uttar Pradesh 226002
+  <br />
+  India
+</p>
               </div>
             </div>
 
@@ -77,7 +83,9 @@ const ContactUsPage: React.FC = () => {
               <Mail className="w-6 h-6 text-indigo-600 mt-1" />
               <div className="ml-4">
                 <h3 className="text-lg font-semibold text-gray-900">Email Us</h3>
-                <p className="text-gray-600">sunilkumaryadav01012004gmail</p>
+               <p className="text-gray-600">
+  lcb2023026@iiitl.ac.in
+</p>
               </div>
             </div>
 
@@ -107,11 +115,11 @@ const ContactUsPage: React.FC = () => {
           {/* Embedded Map */}
           <div className="w-full h-64 rounded-lg overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0199565625476!2d-122.41941548468168!3d37.77492977975979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c2f9ef3db%3A0x8c6e1b045a4c0b2e!2s123%20AI%20St%2C%20San%20Francisco%2C%20CA%2094103%2C%20USA!5e0!3m2!1sen!2s!4v1600000000000"
-              className="w-full h-full"
-              allowFullScreen
-              loading="lazy"
-            />
+  src="https://maps.google.com/maps?q=IIIT%20Lucknow&t=&z=15&ie=UTF8&iwloc=&output=embed"
+  className="w-full h-full"
+  allowFullScreen
+  loading="lazy"
+/>
           </div>
         </div>
 
