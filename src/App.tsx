@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DSARoadmap from './routes/dsa-roadmap';
 import SkillAssessment from "./routes/skill-assessment";
 import DSAAssessment from "./routes/dsa-assessment";
+import ScrollToTop from "./components/ScrollToTop";
 import { PublicLayout }     from '@/layout/public_layout';
 import AuthenticationLayout from '@/layout/auth_layout';
 import ProtectRoutes        from '@/layout/protected-routes';
@@ -23,6 +24,7 @@ import ServicesPage from './routes/ServicesPage';
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
 
         {/** Public routes wrap */}

@@ -253,7 +253,31 @@ export default function Home() {
         <p className="text-xl text-gray-500 text-center mb-10 max-w-2xl">
           Explore supplementary resources to enhance your interview and career preparation journey
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl">
+
+          {/* Card 4 */}
+<div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center gap-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
+  <div className="mb-2 text-blue-600" aria-hidden="true">
+    <Globe size={40} className="text-blue-600" />
+  </div>
+
+  <div className="text-xl font-semibold mb-2 text-center">
+  Preparation Resources
+</div>
+
+<div className="text-gray-600 mb-2 text-center">
+  DSA, Web Dev, ML, CS Fundamentals and Interview Prep
+</div>
+
+  <Link
+    to="/dsa-roadmap"
+    className="text-[#4F46E5] font-medium hover:underline flex items-center"
+  >
+    Explore <span className="ml-1">→</span>
+  </Link>
+</div>
+
+
           {/* Card 1 */}
           <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center gap-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
             <div className="mb-2 text-[#4F46E5]" aria-hidden="true">
