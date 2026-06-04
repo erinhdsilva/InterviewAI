@@ -7,9 +7,9 @@ import {
   Mail,
   Phone,
   Loader2,
-  Twitter,
-  Github,
-  Linkedin
+  // Twitter,
+  // Github,
+  // Linkedin
 } from 'lucide-react';
 
 // 1️⃣ Define and infer schema
