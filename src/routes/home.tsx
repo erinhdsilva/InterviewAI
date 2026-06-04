@@ -288,7 +288,7 @@ export default function Home() {
             </div>
             <div className="text-xl font-semibold mb-2">Skill Assessment</div>
             <div className="text-gray-600 mb-2 text-center">Identify and improve your key skills</div>
-            <Link to="/dsa-roadmap" className="text-[#4F46E5] font-medium hover:underline flex items-center">
+            <Link to="/skill-assessment" className="text-[#4F46E5] font-medium hover:underline flex items-center">
                        Explore <span className="ml-1">→</span>
             </Link>
           </div>

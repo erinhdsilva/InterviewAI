@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DSARoadmap from './routes/dsa-roadmap';
+import SkillAssessment from "./routes/skill-assessment";
+import DSAAssessment from "./routes/dsa-assessment";
 import { PublicLayout }     from '@/layout/public_layout';
 import AuthenticationLayout from '@/layout/auth_layout';
 import ProtectRoutes        from '@/layout/protected-routes';
@@ -33,6 +35,9 @@ const App = () => {
           <Route path="contact" element={<ContactUsPage />} />
           <Route path="services" element={<ServicesPage />} />
           <Route path="dsa-roadmap" element={<DSARoadmap />} /> // NEW ROUTE
+          <Route path="skill-assessment" element={<SkillAssessment />} />
+  <Route path="assessment/dsa" element={<DSAAssessment />} />
+
         </Route>
 
         {/** Authentication-only routes */}
