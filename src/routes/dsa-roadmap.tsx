@@ -2,7 +2,9 @@ import { ExternalLink } from "lucide-react";
 
 export default function DSARoadmap() {
   const sections = [
-    {
+
+    //sources
+    { 
       title: "DSA",
       resources: [
         {

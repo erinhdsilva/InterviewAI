@@ -281,7 +281,7 @@ export default function Home() {
             <a href="#" className="text-[#4F46E5] font-medium hover:underline flex items-center">Explore <span className="ml-1">→</span></a>
           </div>
 
-          {/* Card 3 */}
+          {/* Card 3*/}
           <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center gap-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
             <div className="mb-2 text-purple-600" aria-hidden="true">
               <Brain size={40} className="text-purple-600" />
