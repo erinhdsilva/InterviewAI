@@ -86,25 +86,27 @@ export const Footer = () => {
           {/* Fourth Column: Address and Social Media */}
           <div>
             <h3 className="font-bold text-lg mb-4">Contact Us</h3>
-            <p className="mb-4">BH-3, IIIT Allahabad</p>
+            <p className="mb-4">IIIT Lucknow
+Chak Ganjaria, C. G. City
+Uttar Pradesh 226002</p>
             <div className="flex gap-4">
-              <SocialLink
+              {/* <SocialLink
                 href="https://www.facebook.com/profile.php?id=61560891825004"
                 icon={<Facebook size={24} />}
                 hoverColor="text-blue-500"
-              />
+              /> */}
               <SocialLink
-                href="https://x.com/SUNILKU16514430"
+                href="https://x.com/elonmusk"
                 icon={<Twitter size={24} />}
                 hoverColor="text-blue-400"
               />
               <SocialLink
-                href="https://www.instagram.com/sunilkumaryadav01012004gmail.c/?hl=en"
+                href="https://www.instagram.com/funny/?hl=en"
                 icon={<Instagram size={24} />}
                 hoverColor="text-pink-500"
               />
               <SocialLink
-                href="https://www.linkedin.com/in/sunil-yadav-2131b7286/"
+                href="https://www.linkedin.com/company/ceoofx/"
                 icon={<Linkedin size={24} />}
                 hoverColor="text-blue-700"
               />
