@@ -99,8 +99,8 @@ const ContactUsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex space-x-4 pt-4">
-              <a href="#" className="hover:text-indigo-600">
+            {/* <div className="flex space-x-4 pt-4"> */}
+              {/* <a href="#" className="hover:text-indigo-600">
                 <Twitter />
               </a>
               <a href="#" className="hover:text-indigo-600">
@@ -108,8 +108,8 @@ const ContactUsPage: React.FC = () => {
               </a>
               <a href="#" className="hover:text-indigo-600">
                 <Linkedin />
-              </a>
-            </div>
+              </a> */}
+            {/* </div> */}
           </div>
 
           {/* Embedded Map */}
