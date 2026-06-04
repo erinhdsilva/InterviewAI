@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import DSARoadmap from './routes/dsa-roadmap';
 import { PublicLayout }     from '@/layout/public_layout';
 import AuthenticationLayout from '@/layout/auth_layout';
 import ProtectRoutes        from '@/layout/protected-routes';
@@ -32,6 +32,7 @@ const App = () => {
           <Route path="about" element={<AboutUsPage />} />
           <Route path="contact" element={<ContactUsPage />} />
           <Route path="services" element={<ServicesPage />} />
+          <Route path="dsa-roadmap" element={<DSARoadmap />} />
         </Route>
 
         {/** Authentication-only routes */}
