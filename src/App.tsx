@@ -32,7 +32,7 @@ const App = () => {
           <Route path="about" element={<AboutUsPage />} />
           <Route path="contact" element={<ContactUsPage />} />
           <Route path="services" element={<ServicesPage />} />
-          <Route path="dsa-roadmap" element={<DSARoadmap />} />
+          <Route path="dsa-roadmap" element={<DSARoadmap />} /> // NEW ROUTE
         </Route>
 
         {/** Authentication-only routes */}
