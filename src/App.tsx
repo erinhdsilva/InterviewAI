@@ -16,6 +16,7 @@ import { Dashboard }        from '@/routes/dashboard';
 import { CreateEditPage }   from '@/routes/create-edit-page';
 import { MockLoadPage }     from '@/routes/mock-load-page';
 import { MockInterviewPage } from '@/routes/mock-interview-page';
+import { ScheduleInterviewPage } from '@/routes/schedule-interview-page';
 import { Feedback }         from '@/routes/feedback';
 import { Generate }         from '@/components/generate';
 import ContactUsPage from './routes/Contactus';
@@ -52,6 +53,7 @@ const App = () => {
         <Route element={<ProtectRoutes><MainLayout /></ProtectRoutes>}>
           <Route path="generate" element={<Generate />}>
             <Route index element={<Dashboard />} />
+            <Route path="schedule" element={<ScheduleInterviewPage />} />
             <Route path=":interviewId" element={<CreateEditPage />} />
             <Route path="interview/:interviewId" element={<MockLoadPage />} />
             <Route

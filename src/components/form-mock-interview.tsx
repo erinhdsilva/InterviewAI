@@ -46,6 +46,9 @@ const formSchema = z.object({
     .number()
     .min(0, "Experience cannot be empty or negative"),
   techStack: z.string().min(1, "Tech stack must be at least a character"),
+  topics: z.string().min(1, "Interview topics are required"),
+  duration: z.coerce.number().min(1, "Duration must be at least 1 minute"),
+  scheduledStart: z.string().min(1, "Scheduled start time is required"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -53,7 +56,15 @@ type FormData = z.infer<typeof formSchema>;
 export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {},
+    defaultValues: initialData || {
+      position: "",
+      description: "",
+      experience: 0,
+      techStack: "",
+      topics: "",
+      duration: 30,
+      scheduledStart: "",
+    },
   });
 
   const { isValid, isSubmitting } = form.formState;
@@ -72,25 +83,20 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
     : { title: "Created..!", description: "New Mock Interview created..." };
 
   const cleanAiResponse = (responseText: string) => {
-    // Step 1: Trim any surrounding whitespace
     let cleanText = responseText.trim();
+    cleanText = cleanText.replace(/(json|```|`)/gi, "");
 
-    // Step 2: Remove any occurrences of "json" or code block symbols (``` or `)
-    cleanText = cleanText.replace(/(json|```|`)/g, "");
-
-    // Step 3: Extract a JSON array by capturing text between square brackets
-    const jsonArrayMatch = cleanText.match(/\[.*\]/s);
+    const jsonArrayMatch = cleanText.match(/\[([\s\S]*?)\]/);
     if (jsonArrayMatch) {
       cleanText = jsonArrayMatch[0];
     } else {
-      throw new Error("No JSON array found in response");
+      throw new Error(`No JSON array found in response: ${cleanText}`);
     }
 
-    // Step 4: Parse the clean JSON text into an array of objects
     try {
       return JSON.parse(cleanText);
     } catch (error) {
-      throw new Error("Invalid JSON format: " + (error as Error)?.message);
+      throw new Error(`Invalid JSON format: ${(error as Error)?.message}. Response: ${cleanText}`);
     }
   };
 
@@ -108,12 +114,15 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
         - Job Description: ${data?.description}
         - Years of Experience Required: ${data?.experience}
         - Tech Stacks: ${data?.techStack}
+        - Interview Topics: ${data?.topics}
 
-        The questions should assess skills in ${data?.techStack} development and best practices, problem-solving, and experience handling complex requirements. Please format the output strictly as an array of JSON objects without any additional labels, code blocks, or explanations. Return only the JSON array with questions and answers.
+        The questions should assess skills in ${data?.techStack} development and the topics ${data?.topics}, with a focus on problem-solving and experience handling complex requirements. Please format the output strictly as an array of JSON objects without any additional labels, code blocks, or explanations. Return only the JSON array with questions and answers.
         `;
 
     const aiResult = await chatSession.sendMessage(prompt);
-    const cleanedResponse = cleanAiResponse(aiResult.response.text());
+    const rawText = aiResult.response.text();
+    console.log("Gemini raw response:", rawText);
+    const cleanedResponse = cleanAiResponse(rawText);
 
     return cleanedResponse;
   };
@@ -163,11 +172,25 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
 
   useEffect(() => {
     if (initialData) {
+      const scheduledStartValue = initialData.scheduledStart as
+        | string
+        | { toDate?: () => Date }
+        | undefined;
+      const scheduledStart =
+        typeof scheduledStartValue === "string"
+          ? scheduledStartValue
+          : scheduledStartValue?.toDate
+            ? new Date(scheduledStartValue.toDate()).toISOString().slice(0, 16)
+            : "";
+
       form.reset({
         position: initialData.position,
         description: initialData.description,
         experience: initialData.experience,
         techStack: initialData.techStack,
+        topics: initialData.topics || "",
+        duration: initialData.duration || 30,
+        scheduledStart,
       });
     }
   }, [initialData, form]);
@@ -286,6 +309,75 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name="topics"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="w-full flex items-center justify-between">
+                  <FormLabel>Interview Topics</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                  <Textarea
+                    className="h-12"
+                    disabled={loading}
+                    placeholder="eg:- System Design, React Hooks, Data Structures"
+                    {...field}
+                    value={field.value || ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+            <FormField
+              control={form.control}
+              name="duration"
+              render={({ field }) => (
+                <FormItem className="w-full space-y-4">
+                  <div className="w-full flex items-center justify-between">
+                    <FormLabel>Duration (minutes)</FormLabel>
+                    <FormMessage className="text-sm" />
+                  </div>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      className="h-12"
+                      disabled={loading}
+                      placeholder="eg:- 30"
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="scheduledStart"
+              render={({ field }) => (
+                <FormItem className="w-full space-y-4">
+                  <div className="w-full flex items-center justify-between">
+                    <FormLabel>Schedule Start Time</FormLabel>
+                    <FormMessage className="text-sm" />
+                  </div>
+                  <FormControl>
+                    <Input
+                      type="datetime-local"
+                      className="h-12"
+                      disabled={loading}
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
 
           <div className="w-full flex items-center justify-end gap-6">
             <Button

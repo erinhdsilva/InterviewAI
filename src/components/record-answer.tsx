@@ -17,7 +17,7 @@ import WebCam from "react-webcam";
 import { TooltipButton } from "./tooltip-button";
 import { toast } from "sonner";
 import { chatSession } from "@/scripts";
-import { SaveModal } from "./save-modal"
+import { SaveModal } from "./save-modal";
 import {
   addDoc,
   collection,
@@ -57,7 +57,9 @@ export const RecordAnswer = ({
 
   const [userAnswer, setUserAnswer] = useState("");
   const [isAiGenerating, setIsAiGenerating] = useState(false);
+  const [isFollowUpGenerating, setIsFollowUpGenerating] = useState(false);
   const [aiResult, setAiResult] = useState<AIResponse | null>(null);
+  const [followUpQuestions, setFollowUpQuestions] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -80,10 +82,15 @@ export const RecordAnswer = ({
       const aiResult = await generateResult(
         question.question,
         question.answer,
-        userAnswer
+        userAnswer,
       );
 
       setAiResult(aiResult);
+      const followUps = await generateFollowUpQuestions(
+        question.question,
+        userAnswer,
+      );
+      setFollowUpQuestions(followUps);
     } else {
       startSpeechToText();
     }
@@ -107,7 +114,7 @@ export const RecordAnswer = ({
   const generateResult = async (
     qst: string,
     qstAns: string,
-    userAns: string
+    userAns: string,
   ): Promise<AIResponse> => {
     setIsAiGenerating(true);
     const prompt = `
@@ -122,7 +129,7 @@ export const RecordAnswer = ({
       const aiResult = await chatSession.sendMessage(prompt);
 
       const parsedResult: AIResponse = cleanJsonResponse(
-        aiResult.response.text()
+        aiResult.response.text(),
       );
       return parsedResult;
     } catch (error) {
@@ -136,8 +143,48 @@ export const RecordAnswer = ({
     }
   };
 
+  const cleanJsonArray = (responseText: string) => {
+    let cleanText = responseText.trim();
+    cleanText = cleanText.replace(/(json|```|`)/gi, "");
+    const jsonMatch = cleanText.match(/\[.*\]/s);
+    if (jsonMatch) {
+      cleanText = jsonMatch[0];
+    }
+
+    try {
+      return JSON.parse(cleanText) as Array<{ question: string }>;
+    } catch (error) {
+      throw new Error("Invalid JSON format: " + (error as Error)?.message);
+    }
+  };
+
+  const generateFollowUpQuestions = async (
+    qst: string,
+    userAns: string,
+  ): Promise<string[]> => {
+    setIsFollowUpGenerating(true);
+    const prompt = `
+      Original Question: "${qst}"
+      User Answer: "${userAns}"
+      Based on this response, generate 2 follow-up interview questions that probe deeper into the same topic and help the user improve.
+      Return the result as a JSON array with objects containing only the field "question".
+    `;
+
+    try {
+      const aiResult = await chatSession.sendMessage(prompt);
+      const parsed = cleanJsonArray(aiResult.response.text());
+      return parsed.map((item) => item.question);
+    } catch (error) {
+      console.log(error);
+      return [];
+    } finally {
+      setIsFollowUpGenerating(false);
+    }
+  };
+
   const recordNewAnswer = () => {
     setUserAnswer("");
+    setFollowUpQuestions([]);
     stopSpeechToText();
     startSpeechToText();
   };
@@ -156,7 +203,7 @@ export const RecordAnswer = ({
       const userAnswerQuery = query(
         collection(db, "userAnswers"),
         where("userId", "==", userId),
-        where("question", "==", currentQuestion)
+        where("question", "==", currentQuestion),
       );
 
       const querySnap = await getDocs(userAnswerQuery);
@@ -278,7 +325,7 @@ export const RecordAnswer = ({
         <h2 className="text-lg font-semibold">Your Answer:</h2>
 
         <p className="text-sm mt-2 text-gray-700 whitespace-normal">
-          {userAnswer || "Start recording to see your ansewer here"}
+          {userAnswer || "Start recording to see your answer here"}
         </p>
 
         {interimResult && (
@@ -288,6 +335,30 @@ export const RecordAnswer = ({
           </p>
         )}
       </div>
+
+      {followUpQuestions.length > 0 && (
+        <div className="w-full mt-4 p-4 border rounded-md bg-white">
+          <h2 className="text-lg font-semibold">Follow-up Questions</h2>
+          <p className="text-sm text-gray-600 mt-2 mb-4">
+            These follow-up questions were generated from your answer. Speak
+            your response to continue the interview.
+          </p>
+          <div className="space-y-3">
+            {followUpQuestions.map((questionText, index) => (
+              <div key={index} className="rounded-lg border p-3 bg-slate-50">
+                <p className="text-sm text-slate-900 font-medium">
+                  {`Question ${index + 1}: ${questionText}`}
+                </p>
+              </div>
+            ))}
+          </div>
+          {isFollowUpGenerating && (
+            <p className="text-sm text-slate-500 mt-3">
+              Generating follow-up questions…
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -2,22 +2,22 @@ import { useState } from "react";
 import { Code, Brain, Target, PenTool, Award, Book, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 export default function Home() {
   const [activeTab, setActiveTab] = useState("tech");
 
-
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-white to-purple-100">
-
       {/* Hero Section */}
 
       <section className="flex flex-col items-center justify-center flex-1 pt-28 pb-16">
         <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 text-center mb-6 mt-6">
-          Your Personal <span className="text-violet-600">AI Interview</span> Coach
+          Your Personal <span className="text-violet-600">AI Interview</span>{" "}
+          Coach
         </h1>
         <p className="text-2xl md:text-2xl text-gray-500 text-center mb-10">
-          Double your chances of landing that job offer with our AI-powered interview prep
+          Double your chances of landing that job offer with our AI-powered
+          interview prep
         </p>
         <div className="flex gap-6">
           <Link to="/signin">
@@ -28,19 +28,19 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Resource Tabs Section */}
       <section className="w-full py-16 px-4 bg-white/95 flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-3">
           B.Tech Interview & Preparation Resources
         </h2>
         <p className="text-xl text-gray-500 text-center mb-10 max-w-2xl">
-          Comprehensive collection of resources to support your professional growth and interview preparation
+          Comprehensive collection of resources to support your professional
+          growth and interview preparation
         </p>
 
         {/* Tabs */}
         <div className="flex gap-4 mb-12">
-          {["tech", "aptitude", "interview"].map(tab => (
+          {["tech", "aptitude", "interview"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -48,7 +48,7 @@ export default function Home() {
                 "px-8 py-2 rounded-full font-semibold text-lg transition-all duration-300",
                 activeTab === tab
                   ? "bg-[#4F46E5] text-white shadow-md"
-                  : "bg-gray-100 text-gray-700 border border-gray-300 hover:shadow-md hover:bg-violet-50"
+                  : "bg-gray-100 text-gray-700 border border-gray-300 hover:shadow-md hover:bg-violet-50",
               )}
             >
               {tab === "tech" && "Tech Resources"}
@@ -68,27 +68,51 @@ export default function Home() {
               <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
                 <div className="flex items-center gap-3">
                   <Code size={28} className="text-[#4F46E5]" />
-                  <h2 className="text-2xl font-semibold text-black">Coding Platforms</h2>
+                  <h2 className="text-2xl font-semibold text-black">
+                    Coding Platforms
+                  </h2>
                 </div>
-                <p className="text-gray-600">Practice coding and algorithmic problem-solving</p>
+                <p className="text-gray-600">
+                  Practice coding and algorithmic problem-solving
+                </p>
                 <ul className="space-y-2">
                   <li>
-                    <a href="https://www.geeksforgeeks.org/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.geeksforgeeks.org/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       GeeksforGeeks →
                     </a>
                   </li>
                   <li>
-                    <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://leetcode.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       LeetCode
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.hackerrank.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.hackerrank.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       HackerRank
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.codechef.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.codechef.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       CodeChef
                     </a>
                   </li>
@@ -99,22 +123,41 @@ export default function Home() {
               <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
                 <div className="flex items-center gap-3">
                   <Target size={28} className="text-[#4F46E5]" />
-                  <h2 className="text-2xl font-semibold text-black">Technical Interview Preparation</h2>
+                  <h2 className="text-2xl font-semibold text-black">
+                    Technical Interview Preparation
+                  </h2>
                 </div>
-                <p className="text-gray-600">Resources for system design and technical interviews</p>
+                <p className="text-gray-600">
+                  Resources for system design and technical interviews
+                </p>
                 <ul className="space-y-2">
                   <li>
-                    <a href="https://www.interviewbit.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.interviewbit.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       InterviewBit
                     </a>
                   </li>
                   <li>
-                    <a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://github.com/donnemartin/system-design-primer"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       System Design Primer
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.pramp.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.pramp.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Pramp
                     </a>
                   </li>
@@ -129,56 +172,97 @@ export default function Home() {
               <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
                 <div className="flex items-center gap-3">
                   <PenTool size={28} className="text-[#4F46E5]" />
-                  <h2 className="text-2xl font-semibold text-black">Aptitude & Reasoning</h2>
+                  <h2 className="text-2xl font-semibold text-black">
+                    Aptitude & Reasoning
+                  </h2>
                 </div>
-                <p className="text-gray-600">Practice quantitative and logical reasoning skills</p>
+                <p className="text-gray-600">
+                  Practice quantitative and logical reasoning skills
+                </p>
                 <ul className="space-y-2">
                   <li>
-                    <a href="https://www.indiabix.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.indiabix.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       IndiaBix
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.smartkeeda.com/reasoning-aptitude" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.smartkeeda.com/reasoning-aptitude"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       SmartKeeda Aptitude
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.geeksforgeeks.org/aptitude-questions-and-answers/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.geeksforgeeks.org/aptitude-questions-and-answers/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       GeekForGeeks
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.competitiveexamprep.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.competitiveexamprep.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Competitive Exam Prep
                     </a>
                   </li>
                 </ul>
               </div>
 
-
-
               {/* Competitive Exams */}
               {/* Resources for Competitive Exams */}
               <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
                 <div className="flex items-center gap-3">
                   <Award size={28} className="text-[#4F46E5]" />
-                  <h2 className="text-2xl font-semibold text-black">Competitive Exam Prep</h2>
+                  <h2 className="text-2xl font-semibold text-black">
+                    Competitive Exam Prep
+                  </h2>
                 </div>
-                <p className="text-gray-600">Resources for various competitive exams</p>
+                <p className="text-gray-600">
+                  Resources for various competitive exams
+                </p>
                 <ul className="space-y-2">
                   <li>
-                    <a href="https://gateoverflow.in/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://gateoverflow.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       GATE Overflow
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.careerpower.in/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.careerpower.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Career Power
                     </a>
                   </li>
                   <li>
-                    <a href="https://brilliant.org/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://brilliant.org/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Brilliant.org
                     </a>
                   </li>
@@ -194,26 +278,43 @@ export default function Home() {
               <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
                 <div className="flex items-center gap-3">
                   <Book size={28} className="text-[#4F46E5]" />
-                  <h2 className="text-2xl font-semibold text-black">Interview Guides</h2>
+                  <h2 className="text-2xl font-semibold text-black">
+                    Interview Guides
+                  </h2>
                 </div>
-                <p className="text-gray-600">Insider tips and preparation materials</p>
+                <p className="text-gray-600">
+                  Insider tips and preparation materials
+                </p>
                 <ul className="space-y-2">
                   <li>
-                    <a href="https://interviewbuddy.net/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://interviewbuddy.net/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       InterviewBuddy
                     </a>
-
                   </li>
                   <li>
-                    <a href="https://www.preplaced.in/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.preplaced.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Preplaced
                     </a>
                   </li>
                   <li>
-                    <a href="https://interviewing.io/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://interviewing.io/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Interviewing.io
                     </a>
-
                   </li>
                 </ul>
               </div>
@@ -221,22 +322,41 @@ export default function Home() {
               <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
                 <div className="flex items-center gap-3">
                   <Globe size={28} className="text-[#4F46E5]" />
-                  <h2 className="text-2xl font-semibold text-black">Global Learning Platforms</h2>
+                  <h2 className="text-2xl font-semibold text-black">
+                    Global Learning Platforms
+                  </h2>
                 </div>
-                <p className="text-gray-600">Top global platforms for courses</p>
+                <p className="text-gray-600">
+                  Top global platforms for courses
+                </p>
                 <ul className="space-y-2">
                   <li>
-                    <a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.coursera.org/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Coursera
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.udemy.com/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.udemy.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Udemy
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.pw.live/" target="_blank" rel="noopener noreferrer" className="text-[#4F46E5] hover:underline">
+                    <a
+                      href="https://www.pw.live/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4F46E5] hover:underline"
+                    >
                       Physics Wallah
                     </a>
                   </li>
@@ -249,34 +369,35 @@ export default function Home() {
 
       {/* Additional Preparation Tips */}
       <section className="w-full py-16 px-4 flex flex-col items-center bg-white/95">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-3">Additional Preparation Tips</h2>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-3">
+          Additional Preparation Tips
+        </h2>
         <p className="text-xl text-gray-500 text-center mb-10 max-w-2xl">
-          Explore supplementary resources to enhance your interview and career preparation journey
+          Explore supplementary resources to enhance your interview and career
+          preparation journey
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl">
-
           {/* Card 4 */}
-<div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center gap-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
-  <div className="mb-2 text-blue-600" aria-hidden="true">
-    <Globe size={40} className="text-blue-600" />
-  </div>
+          <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center gap-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
+            <div className="mb-2 text-blue-600" aria-hidden="true">
+              <Globe size={40} className="text-blue-600" />
+            </div>
 
-  <div className="text-xl font-semibold mb-2 text-center">
-  Preparation Resources
-</div>
+            <div className="text-xl font-semibold mb-2 text-center">
+              Preparation Resources
+            </div>
 
-<div className="text-gray-600 mb-2 text-center">
-  DSA, Web Dev, ML, CS Fundamentals and Interview Prep
-</div>
+            <div className="text-gray-600 mb-2 text-center">
+              DSA, Web Dev, ML, CS Fundamentals and Interview Prep
+            </div>
 
-  <Link
-    to="/dsa-roadmap"
-    className="text-[#4F46E5] font-medium hover:underline flex items-center"
-  >
-    Explore <span className="ml-1">→</span>
-  </Link>
-</div>
-
+            <Link
+              to="/dsa-roadmap"
+              className="text-[#4F46E5] font-medium hover:underline flex items-center"
+            >
+              Explore <span className="ml-1">→</span>
+            </Link>
+          </div>
 
           {/* Card 1 */}
           <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center gap-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:bg-violet-50 active:scale-95">
@@ -284,7 +405,9 @@ export default function Home() {
               <Book size={40} className="text-[#4F46E5]" />
             </div>
             <div className="text-xl font-semibold mb-2">Resume Building</div>
-            <div className="text-gray-600 mb-2 text-center">Create a standout professional resume</div>
+            <div className="text-gray-600 mb-2 text-center">
+              Create a standout professional resume
+            </div>
             <a
               href="https://www.canva.com/resumes/templates/"
               target="_blank"
@@ -301,8 +424,15 @@ export default function Home() {
               <Target size={40} className="text-green-600" />
             </div>
             <div className="text-xl font-semibold mb-2">Mock Interviews</div>
-            <div className="text-gray-600 mb-2 text-center">Practice with AI-powered interview simulations</div>
-            <a href="#" className="text-[#4F46E5] font-medium hover:underline flex items-center">Explore <span className="ml-1">→</span></a>
+            <div className="text-gray-600 mb-2 text-center">
+              Practice with AI-powered interview simulations
+            </div>
+            <Link
+              to="/generate/schedule"
+              className="text-[#4F46E5] font-medium hover:underline flex items-center"
+            >
+              Explore <span className="ml-1">→</span>
+            </Link>
           </div>
 
           {/* Card 3*/}
@@ -311,9 +441,14 @@ export default function Home() {
               <Brain size={40} className="text-purple-600" />
             </div>
             <div className="text-xl font-semibold mb-2">Skill Assessment</div>
-            <div className="text-gray-600 mb-2 text-center">Identify and improve your key skills</div>
-            <Link to="/skill-assessment" className="text-[#4F46E5] font-medium hover:underline flex items-center">
-                       Explore <span className="ml-1">→</span>
+            <div className="text-gray-600 mb-2 text-center">
+              Identify and improve your key skills
+            </div>
+            <Link
+              to="/skill-assessment"
+              className="text-[#4F46E5] font-medium hover:underline flex items-center"
+            >
+              Explore <span className="ml-1">→</span>
             </Link>
           </div>
         </div>

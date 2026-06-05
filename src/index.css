@@ -74,6 +74,7 @@
     --destructive-foreground: 60 9.1% 97.8%;
   }  
 }
+
 @layer base{
   *{
     @apply border-border;
@@ -84,8 +85,163 @@
   .text-outline {
     color: white;
     text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.6),
-      /* Top-left */ 1px -1px 0 rgba(0, 0, 0, 0.6),
-      /* Top-right */ -1px 1px 0 rgba(0, 0, 0, 0.6),
-      /* Bottom-left */ 1px 1px 0 rgba(0, 0, 0, 0.6); /* Bottom-right */
+      1px -1px 0 rgba(0, 0, 0, 0.6),
+      -1px 1px 0 rgba(0, 0, 0, 0.6),
+      1px 1px 0 rgba(0, 0, 0, 0.6);
   }
 }
+
+/* ─────────────────────────────────────────────
+   WAVEFORM BAR ANIMATION
+   Used in AiInterviewSession for mic + AI speech
+───────────────────────────────────────────── */
+@keyframes waveformBar {
+  0%   { transform: scaleY(0.3); }
+  100% { transform: scaleY(1); }
+}
+
+/* ─────────────────────────────────────────────
+   COUNTDOWN DIGIT STYLING
+   Large glowing numerals on the waiting page
+───────────────────────────────────────────── */
+.countdown-digit {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: white;
+  background: linear-gradient(135deg, #a78bfa, #818cf8, #67e8f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
+  transition: color 0.3s ease;
+}
+
+.countdown-digit.countdown-urgent {
+  background: linear-gradient(135deg, #f87171, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.6));
+  animation: urgentPulse 0.5s ease-in-out infinite alternate;
+}
+
+.countdown-colon {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 900;
+  color: rgba(167, 139, 250, 0.6);
+  line-height: 1;
+  align-self: flex-start;
+  padding-top: 4px;
+  animation: colonBlink 1s step-end infinite;
+}
+
+@keyframes colonBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+@keyframes urgentPulse {
+  from { filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.4)); }
+  to   { filter: drop-shadow(0 0 28px rgba(239, 68, 68, 0.9)); }
+}
+
+/* ─────────────────────────────────────────────
+   COUNTDOWN PULSE RING
+   Glowing ring behind the countdown card
+───────────────────────────────────────────── */
+.countdown-pulse-ring {
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 0 rgba(139, 92, 246, 0.4),
+    0 0 60px 20px rgba(99, 102, 241, 0.15);
+  animation: countdownRingPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes countdownRingPulse {
+  0%   { box-shadow: 0 0 0  0px rgba(139,92,246,0.35), 0 0 60px 20px rgba(99,102,241,0.12); }
+  50%  { box-shadow: 0 0 0 30px rgba(139,92,246,0),    0 0 80px 30px rgba(99,102,241,0.20); }
+  100% { box-shadow: 0 0 0  0px rgba(139,92,246,0),    0 0 60px 20px rgba(99,102,241,0.12); }
+}
+
+/* ─────────────────────────────────────────────
+   FLOATING ORB BACKGROUNDS
+   Used on schedule & waiting pages
+───────────────────────────────────────────── */
+.schedule-orb,
+.wait-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.schedule-orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, hsl(261,80%,65%), transparent 70%);
+  top: -120px; left: -100px;
+  animation: orbFloat1 12s ease-in-out infinite alternate;
+}
+.schedule-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, hsl(220,80%,60%), transparent 70%);
+  bottom: -80px; right: -80px;
+  animation: orbFloat2 10s ease-in-out infinite alternate;
+}
+.schedule-orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, hsl(280,70%,55%), transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: orbFloat3 14s ease-in-out infinite alternate;
+}
+
+.wait-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, hsl(261,80%,65%), transparent 70%);
+  top: -150px; right: -100px;
+  animation: orbFloat1 14s ease-in-out infinite alternate;
+}
+.wait-orb-2 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, hsl(220,80%,60%), transparent 70%);
+  bottom: -100px; left: -80px;
+  animation: orbFloat2 11s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 40px) scale(1.08); }
+}
+@keyframes orbFloat2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-25px, -30px) scale(1.05); }
+}
+@keyframes orbFloat3 {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to   { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* ─────────────────────────────────────────────
+   SCHEDULE PAGE ICON GLOW
+───────────────────────────────────────────── */
+.schedule-icon-glow {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4), 0 0 60px rgba(139, 92, 246, 0.15);
+  animation: iconGlowPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes iconGlowPulse {
+  from { box-shadow: 0 0 20px rgba(139,92,246,0.3), 0 0 40px rgba(139,92,246,0.1); }
+  to   { box-shadow: 0 0 40px rgba(139,92,246,0.6), 0 0 80px rgba(139,92,246,0.25); }
+}
+
+/* ─────────────────────────────────────────────
+   CONCLUDE OVERLAY GLOW
+   The glowing ring behind the trophy icon
+───────────────────────────────────────────── */
+.conclude-glow {
+  background: rgba(250, 204, 21, 0.3);
+  box-shadow: 0 0 60px rgba(250, 204, 21, 0.4);
+}

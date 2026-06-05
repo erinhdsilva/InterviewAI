@@ -16,9 +16,18 @@ export interface Interview {
   experience: number;
   userId: string;
   techStack: string;
+  topics?: string;
+  duration?: number;
+  scheduledStart?: string;
+  status?: "scheduled" | "in-progress" | "completed";
   questions: { question: string; answer: string }[];
-  createdAt: Timestamp;
-  updateAt: Timestamp;
+  createdAt?: Timestamp | FieldValue;
+  updatedAt?: Timestamp | FieldValue;
+  updateAt?: Timestamp | FieldValue;
+  // Session tracking
+  stoppedEarly?: boolean;       // true if user manually ended before timer ran out
+  timeTaken?: number;           // actual minutes spent in session
+  endedAt?: Timestamp | FieldValue;
 }
 
 export interface UserAnswer {
